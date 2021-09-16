@@ -6,7 +6,7 @@ const { UserModel } = require("../models"); // 3 = 4 = 5
 const getAllUsers = async (_, res) => {
   try {
     const userList = await UserModel.find({});
-    res.json(userList);
+    res.status(200).json(userList);
   } catch (err) {
     res.status(404).send("No Users found");
   }
@@ -21,7 +21,7 @@ const newUser = async (req, res) => {
     if (usrExists) return res.status(404).send("User already exists");
     const newUser = new UserModel(req.body);
     const save = await newUser.save();
-    res.json(save);
+    res.status(200).json(save);
   } catch (err) {
     res.send(err);
   }
@@ -30,7 +30,8 @@ const newUser = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
-    res.send(usr);
+    if(!usr) return res.status(404).send("User not defined");
+    res.status(200).res.send(usr);
   } catch (err) {
     res.send(err);
   }
@@ -39,6 +40,7 @@ const getUser = async (req, res) => {
 const modifyUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
+    if(!usr) return res.status(404).send("User not defined");
     const { age, name } = req.body;
     if (age) usr.age = age;
     if (name) usr.name = name;
@@ -46,17 +48,17 @@ const modifyUser = async (req, res) => {
     res.status(200).send(usr);
   } catch (err) {
     res.send(err);
-    res.status(404).send("User not defined");
   }
 };
 
 const deleteUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
-    res.send(usr);
+    if(!usr) return res.status(404).send("User not defined");
+    res.status(200).send(usr);
     usr.remove();
   } catch (err) {
-    res.status(404).send("User not defined");
+    res.send(err);
   }
 };
 

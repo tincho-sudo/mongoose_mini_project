@@ -30,7 +30,7 @@ const newUser = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
-    if(!usr) return res.status(404).send("User not defined");
+    if (!usr) return res.status(404).send("User not defined");
     res.status(200).res.send(usr);
   } catch (err) {
     res.send(err);
@@ -40,7 +40,7 @@ const getUser = async (req, res) => {
 const modifyUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
-    if(!usr) return res.status(404).send("User not defined");
+    if (!usr) return res.status(404).send("User not defined");
     const { age, name } = req.body;
     if (age) usr.age = age;
     if (name) usr.name = name;
@@ -54,7 +54,7 @@ const modifyUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
-    if(!usr) return res.status(404).send("User not defined");
+    if (!usr) return res.status(404).send("User not defined");
     res.status(200).send(usr);
     usr.remove();
   } catch (err) {

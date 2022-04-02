@@ -1,4 +1,4 @@
-const UserModel = require("./user/user.model.js");
+const UserModel = require("./models.user");
 //const models = { UserModel };
 
 module.exports = { UserModel };

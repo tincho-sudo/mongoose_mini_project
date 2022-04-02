@@ -1,7 +1,7 @@
 const { getCar, modifyCar, newCar, getCars } = require("../controllers/controllers.car");
 
 const routes = (app) => {
-  app.route("/car/:id").get(getCar).put(modifyCar).delete(deleteCar);
+  app.route("/car/:id").get(getCar).put(modifyCar);
 
   app.route("/cars/").get(getCars).post(newCar);
 

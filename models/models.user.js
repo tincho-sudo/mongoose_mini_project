@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: {
     type: String,
+    ref: "User",
   },
   age: {
     type: Number,
   },
+  cars: [],
 });
 
 const UserModel = mongoose.model("User", UserSchema);

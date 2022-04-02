@@ -1,3 +1,4 @@
+const { User, Car, UserCar } = require("../models");
 const mongoose = require("mongoose");
 const { UserModel } = require("../models"); // 3 = 4 = 5
 //const UserModel = Models.UserModel; // 4 = 5  //// Destruturing
@@ -55,12 +56,27 @@ const deleteUser = async (req, res) => {
   try {
     const usr = await UserModel.findById(req.params.id);
     if (!usr) return res.status(404).send("User not defined");
+
+    const carsToDelete=[];
+    const carsOwnedByUser = await UserCar.find({
+      user: id_user,
+    });
+    carsOwnedByUser.map((user) => carsToDelete.push(user._id));
+    await UserCar.deleteMany({
+      _id: {
+        $in: carsToDelete,
+      },
+    });
+
+
     res.status(200).send(usr);
     usr.remove();
   } catch (err) {
     res.send(err);
   }
 };
+
+
 
 module.exports = {
   getAllUsers,

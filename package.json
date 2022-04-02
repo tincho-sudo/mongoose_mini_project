@@ -9,13 +9,14 @@
     "mongoose": "^6.0.5"
   },
   "devDependencies": {
+    "dotenv": "^16.0.0",
     "nodemon": "^2.0.12",
     "prettier": "2.4.0"
   },
   "scripts": {
     "start": "node app.js",
     "dev": "npx nodemon app.js",
-    "format": "prettier --write {*.j*,!(node*)**/*.js}"
+    "format": "prettier --write ."
   },
   "author": "Tin",
   "license": "ISC"

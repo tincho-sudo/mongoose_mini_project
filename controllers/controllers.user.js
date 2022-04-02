@@ -57,7 +57,7 @@ const deleteUser = async (req, res) => {
     const usr = await UserModel.findById(req.params.id);
     if (!usr) return res.status(404).send("User not defined");
 
-    const carsToDelete=[];
+    const carsToDelete = [];
     const carsOwnedByUser = await UserCar.find({
       user: id_user,
     });
@@ -68,15 +68,12 @@ const deleteUser = async (req, res) => {
       },
     });
 
-
     res.status(200).send(usr);
     usr.remove();
   } catch (err) {
     res.send(err);
   }
 };
-
-
 
 module.exports = {
   getAllUsers,

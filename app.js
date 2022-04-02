@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 
-const routes = require("./routes/userRoutes.js");
+const userRts = require("./routes/routes.user");
+const carRts = require ("./routes/routes.car");
 
 app.use(express.json());
 app.use(
@@ -10,4 +11,5 @@ app.use(
   })
 );
 
-routes(app);
+userRts(app);
+carRts(app);
